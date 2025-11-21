@@ -4,7 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Carta Virtual — Para você</title>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
   <style>
     :root{
       --bg1: #FFF7F0;
@@ -170,26 +169,18 @@ Obrigado(a) por existir, por colorir meus dias e por ser meu porto seguro. Esper
 
 Com todo o meu carinho,
 
-— Quem te ama
         </div>
 
-        <div class="sign">— Com carinho, [seu nome]</div>
-
-        <div class="footer">Dê um duplo clique no texto acima para editar — personalize como quiser.</div>
+        <div class="sign">— Com carinho, Deivid Anjos</div>
       </div>
 
       <aside class="photos">
-        <img id="mainPhoto" class="main-photo" src="https://picsum.photos/800/600?random=1" alt="Foto principal">
+        <img id="mainPhoto" class="main-photo" src="/Images/image_principal.jpg" alt="Foto principal">
 
         <div class="thumbs" id="thumbs">
-          <img src="https://picsum.photos/300/300?random=2" alt="foto 1">
-          <img src="https://picsum.photos/300/300?random=3" alt="foto 2">
-          <img src="https://picsum.photos/300/300?random=4" alt="foto 3">
-        </div>
-
-        <div class="controls">
-          <button class="btn" id="downloadBtn">Baixar como imagem</button>
-          <button class="btn soft-btn" id="changeTheme">Mudar cor</button>
+          <img src="/Images/image1.jpg" alt="foto 1">
+          <img src="/Images/image2.jpg" alt="foto 2">
+          <img src="/Images/image3.jpg" alt="foto 3">
         </div>
 
       </aside>
@@ -198,58 +189,12 @@ Com todo o meu carinho,
   </div>
 
   <script>
-    // Permitir edição rápida do texto
-    const message = document.getElementById('message');
-    message.addEventListener('dblclick', ()=>{
-      if(message.isContentEditable){
-        message.contentEditable = 'false';
-        message.style.outline = 'none';
-      } else {
-        message.contentEditable = 'true';
-        message.focus();
-        message.style.outline = '2px dashed rgba(255,107,129,0.4)';
-      }
-    });
-
     // Trocar foto principal ao clicar nas miniaturas
     document.getElementById('thumbs').addEventListener('click', (e)=>{
       if(e.target.tagName === 'IMG'){
         document.getElementById('mainPhoto').src = e.target.src.replace('300/300','800/600');
       }
     });
-
-    // Mudar cor do tema (variações suaves)
-    const themes = ["#ff6b81", "#ff9aa2", "#ffd6a5", "#c6f7e2", "#bdb2ff"];
-    const changeThemeBtn = document.getElementById('changeTheme');
-    changeThemeBtn.addEventListener('click', ()=>{
-      const c = themes[Math.floor(Math.random()*themes.length)];
-      document.documentElement.style.setProperty('--accent', c);
-    });
-
-    // Baixar como imagem simples (gera SVG + canvas)
-    document.getElementById('downloadBtn').addEventListener('click', async ()=>{
-      const card = document.querySelector('.card');
-      const rect = card.getBoundingClientRect();
-      // Criar clone para renderizar bonito
-      const clone = card.cloneNode(true);
-      clone.style.margin = '0';
-      clone.style.transform = 'none';
-      document.body.appendChild(clone);
-
-      // Usar html2canvas se disponível — fallback simples
-      if(window.html2canvas){
-        const canvas = await html2canvas(clone, {scale:2});
-        const a = document.createElement('a');
-        a.href = canvas.toDataURL('image/png');
-        a.download = 'carta-virtual.png';
-        a.click();
-      } else {
-        alert('Se quiser baixar como imagem, instale a biblioteca html2canvas ou tire uma captura de tela.');
-      }
-      document.body.removeChild(clone);
-    });
-
-    // Dica: substitua as URLs das fotos pelos caminhos locais (ex: images/foto1.jpg) para usar suas fotos.
   </script>
 </body>
 </html>
